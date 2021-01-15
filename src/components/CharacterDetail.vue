@@ -1,7 +1,12 @@
 <template>
   <div v-if="character">
-    <h2>{{ character.name }}</h2>
-    <p>{{ character.species }}</p>
+    <div class="character-info">
+      <li>
+        <h2>{{ character.name }}</h2>
+        <p>{{ character.species }}</p>
+      </li>
+      <img v-bind:src="character.image" />
+    </div>
   </div>
 </template>
 
@@ -23,5 +28,19 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.character-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  text-align: center;
+  background-color: purple;
+  border-radius: 35px;
+  width: 500px;
+  height: 300px;
+  padding: 20px;
+}
+img {
+  border-radius: 35px;
+}
 </style>

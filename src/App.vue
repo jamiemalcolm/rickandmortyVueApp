@@ -2,12 +2,12 @@
   <div class="outer-container">
     <h1>Rick And Morty</h1>
     <div class="main-container">
-      <characters-list :characters="characters" class="list"></characters-list>
+      <!-- <characters-list :characters="characters" class="list"></characters-list>
       <character-details :character="selectedCharacter"></character-details>
       <location-list :locations="locations"></location-list>
-      <location-details :location="selectedLocation"></location-details>
-      <!-- <character-filter-form :characters="characters"></character-filter-form>
-      <character-detail></character-detail> -->
+      <location-details :location="selectedLocation"></location-details> -->
+      <character-filter-form :characters="characters"></character-filter-form>
+      <character-detail character="character"></character-detail>
     </div>
   </div>
 </template>
@@ -56,12 +56,12 @@ export default {
     },
   },
   components: {
-    "characters-list": CharactersList,
-    "character-details": CharacterDetails,
-    // "character-filter-form": CharacterFilterForm,
-    // "character-detail": CharacterDetail,
-    "location-list": LocationList,
-    "location-details": LocationDetails,
+    // "characters-list": CharactersList,
+    // "character-details": CharacterDetails,
+    "character-filter-form": CharacterFilterForm,
+    "character-detail": CharacterDetail,
+    // "location-list": LocationList,
+    // "location-details": LocationDetails,
   },
 };
 </script>

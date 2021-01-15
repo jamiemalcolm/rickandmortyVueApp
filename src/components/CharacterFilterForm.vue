@@ -1,7 +1,7 @@
 <template>
   <form>
-    <select v-on:change="handleNameClick" v-model="selectedCharacter">
-      <option disabled value="">Select A Character</option>
+    <select v-on:change="handleSelect" v-model="selectedCharacter">
+      <option value="">Select A Character...</option>
       <option v-for="character in characters" :value="character">
         {{ character.name }}
       </option>
@@ -27,4 +27,7 @@ export default {
 </script>
 
 <style>
+form {
+  text-align: center;
+}
 </style>
