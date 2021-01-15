@@ -4,6 +4,8 @@
     <div class="main-container">
       <characters-list :characters="characters" class="list"></characters-list>
       <character-details :character="selectedCharacter"></character-details>
+      <location-list :locations="locations"></location-list>
+      <location-details :location="selectedLocation"></location-details>
       <!-- <character-filter-form :characters="characters"></character-filter-form>
       <character-detail></character-detail> -->
     </div>
@@ -15,11 +17,11 @@ import { eventBus } from "./main.js";
 import CharactersList from "./components/CharactersList.vue";
 import CharacterDetails from "./components/CharacterDetails.vue";
 import LocationList from "./components/LocationList.vue";
-import Location from "./components/Location.vue";
 import LocationDetails from "./components/LocationDetails.vue";
 
 import CharacterFilterForm from "./components/CharacterFilterForm.vue";
 import CharacterDetail from "./components/CharacterDetail.vue";
+
 export default {
   name: "app",
   data() {
@@ -36,6 +38,9 @@ export default {
 
     eventBus.$on("selected-char", (character) => {
       this.selectedCharacter = character;
+    });
+    eventBus.$on("selected-location", (location) => {
+      this.selectedLocation = location;
     });
   },
   methods: {
