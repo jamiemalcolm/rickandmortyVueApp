@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <p>This is the character list</p>
+  <div class="characters-list">
+    <h2>Characters:</h2>
     <character
       v-for="(character, index) in characters"
       :character="character"
@@ -22,4 +22,10 @@ export default {
 </script>
 
 <style>
+.characters-list {
+  background-color: purple;
+  text-align: center;
+  border-radius: 35px;
+  padding: 20px;
+}
 </style>
