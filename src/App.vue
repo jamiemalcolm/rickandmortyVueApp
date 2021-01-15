@@ -2,10 +2,10 @@
   <div class="outer-container">
     <h1>Rick And Morty</h1>
     <div class="main-container">
-      <!-- <characters-list :characters="characters" class="list"></characters-list>
-      <character-details :character="selectedCharacter"></character-details> -->
-      <character-filter-form :characters="characters"></character-filter-form>
-      <character-detail></character-detail>
+      <characters-list :characters="characters" class="list"></characters-list>
+      <character-details :character="selectedCharacter"></character-details>
+      <!-- <character-filter-form :characters="characters"></character-filter-form>
+      <character-detail></character-detail> -->
     </div>
   </div>
 </template>
@@ -14,6 +14,9 @@
 import { eventBus } from "./main.js";
 import CharactersList from "./components/CharactersList.vue";
 import CharacterDetails from "./components/CharacterDetails.vue";
+import LocationList from "./components/LocationList.vue";
+import Location from "./components/Location.vue";
+import LocationDetails from "./components/LocationDetails.vue";
 
 import CharacterFilterForm from "./components/CharacterFilterForm.vue";
 import CharacterDetail from "./components/CharacterDetail.vue";
@@ -22,7 +25,7 @@ export default {
   data() {
     return {
       characters: [],
-      // selectedCharacter: null,
+      selectedCharacter: null,
       locations: [],
       selectedLocation: null,
     };
@@ -50,8 +53,10 @@ export default {
   components: {
     "characters-list": CharactersList,
     "character-details": CharacterDetails,
-    "character-filter-form": CharacterFilterForm,
-    "character-detail": CharacterDetail,
+    // "character-filter-form": CharacterFilterForm,
+    // "character-detail": CharacterDetail,
+    "location-list": LocationList,
+    "location-details": LocationDetails,
   },
 };
 </script>
