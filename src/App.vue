@@ -3,10 +3,6 @@
     <h1>Rick And Morty</h1>
     <character-filter-form :characters="characters"></character-filter-form>
     <div class="main-container">
-      <!-- <characters-list :characters="characters" class="list"></characters-list>
-      <character-details :character="selectedCharacter"></character-details>
-      <location-list :locations="locations"></location-list>
-      <location-details :location="selectedLocation"></location-details> -->
       <character-detail character="character"></character-detail>
     </div>
   </div>
@@ -14,8 +10,6 @@
 
 <script>
 import { eventBus } from "./main.js";
-// import CharactersList from "./components/CharactersList.vue";
-// import CharacterDetails from "./components/CharacterDetails.vue";
 import LocationList from "./components/LocationList.vue";
 import LocationDetails from "./components/LocationDetails.vue";
 
@@ -34,7 +28,7 @@ export default {
   },
   mounted() {
     this.getAllCharacters();
-    this.getLocations();
+    this.getAllLocations();
 
     eventBus.$on("selected-location", (location) => {
       this.selectedLocation = location;
@@ -42,10 +36,12 @@ export default {
   },
   methods: {
     getAllCharacters: function () {
+      // create array from 1-671
       const array = [];
       for (var i = 0; i < 671; i++) {
         array.push(i + 1);
       }
+      // map promise to an array of api fetch with character number taking the number from previous array
       const promises = array.map((number) => {
         return fetch(
           `https://rickandmortyapi.com/api/character/${number}`
@@ -59,10 +55,22 @@ export default {
       });
     },
 
-    getLocations: function () {
-      fetch("https://rickandmortyapi.com/api/location?page=1")
-        .then((res) => res.json())
-        .then((data) => (this.locations = data.results));
+    getAllLocations: function () {
+      const array = [];
+      for (var i = 0; i < 108; i++) {
+        array.push(i + 1);
+      }
+      const promises = array.map((number) => {
+        return fetch(
+          `https://rickandmortyapi.com/api/location/${number}`
+        ).then((res) => res.json());
+      });
+      Promise.all(promises).then((data) => {
+        const listOfLocations = data.reduce((location, locationToAdd) => {
+          return location.concat(locationToAdd);
+        }, []);
+        return (this.locations = listOfLocations);
+      });
     },
   },
   components: {
