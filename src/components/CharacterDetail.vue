@@ -2,10 +2,14 @@
   <div v-if="character">
     <div class="character-info">
       <li>
-        <h2>{{ character.name }}</h2>
-        <p>{{ character.species }}</p>
+        <h2><span>Name :</span> {{ character.name }}</h2>
+        <p><span>Species :</span> {{ character.species }}</p>
+        <p><span>Origin :</span> {{ character.origin.name }}</p>
+        <!-- <p><span>Appears in </span>:{{ character.episode }}</p> -->
       </li>
+
       <img v-bind:src="character.image" />
+      <!-- <button v-on:click="getEpisodesIn">Appears In</button> -->
     </div>
   </div>
 </template>
@@ -25,6 +29,9 @@ export default {
       this.character = character;
     });
   },
+  methods: {
+    getEpisodesIn: function () {},
+  },
 };
 </script>
 
@@ -36,8 +43,8 @@ export default {
   text-align: center;
   background-color: purple;
   border-radius: 35px;
-  width: 500px;
-  height: 300px;
+  width: fit-content;
+  height: fit-content;
   padding: 20px;
 }
 img {

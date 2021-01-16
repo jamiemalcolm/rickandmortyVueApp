@@ -1,12 +1,12 @@
 <template>
   <div class="outer-container">
     <h1>Rick And Morty</h1>
+    <character-filter-form :characters="characters"></character-filter-form>
     <div class="main-container">
       <!-- <characters-list :characters="characters" class="list"></characters-list>
       <character-details :character="selectedCharacter"></character-details>
       <location-list :locations="locations"></location-list>
       <location-details :location="selectedLocation"></location-details> -->
-      <character-filter-form :characters="characters"></character-filter-form>
       <character-detail character="character"></character-detail>
     </div>
   </div>
@@ -14,8 +14,8 @@
 
 <script>
 import { eventBus } from "./main.js";
-import CharactersList from "./components/CharactersList.vue";
-import CharacterDetails from "./components/CharacterDetails.vue";
+// import CharactersList from "./components/CharactersList.vue";
+// import CharacterDetails from "./components/CharacterDetails.vue";
 import LocationList from "./components/LocationList.vue";
 import LocationDetails from "./components/LocationDetails.vue";
 
@@ -27,28 +27,38 @@ export default {
   data() {
     return {
       characters: [],
-      selectedCharacter: null,
+      // selectedCharacter: null,
       locations: [],
-      selectedLocation: null,
+      // selectedLocation: null,
     };
   },
   mounted() {
     this.getAllCharacters();
     this.getLocations();
 
-    eventBus.$on("selected-char", (character) => {
-      this.selectedCharacter = character;
-    });
     eventBus.$on("selected-location", (location) => {
       this.selectedLocation = location;
     });
   },
   methods: {
     getAllCharacters: function () {
-      fetch("https://rickandmortyapi.com/api/character?page=1")
-        .then((res) => res.json())
-        .then((data) => (this.characters = data.results));
+      const array = [];
+      for (var i = 0; i < 671; i++) {
+        array.push(i + 1);
+      }
+      const promises = array.map((number) => {
+        return fetch(
+          `https://rickandmortyapi.com/api/character/${number}`
+        ).then((res) => res.json());
+      });
+      Promise.all(promises).then((data) => {
+        const listOfCharacters = data.reduce((character, characterToAdd) => {
+          return character.concat(characterToAdd);
+        }, []);
+        return (this.characters = listOfCharacters);
+      });
     },
+
     getLocations: function () {
       fetch("https://rickandmortyapi.com/api/location?page=1")
         .then((res) => res.json())
@@ -56,8 +66,6 @@ export default {
     },
   },
   components: {
-    // "characters-list": CharactersList,
-    // "character-details": CharacterDetails,
     "character-filter-form": CharacterFilterForm,
     "character-detail": CharacterDetail,
     // "location-list": LocationList,
@@ -73,9 +81,6 @@ body {
 }
 h1 {
   text-align: center;
-}
-
-.outer-container {
 }
 .main-container {
   display: flex;

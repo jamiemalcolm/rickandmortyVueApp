@@ -27,7 +27,11 @@ export default {
 </script>
 
 <style>
-form {
+select {
   text-align: center;
+  background-color: #7f5a83;
+  color: white;
+  border: none;
+  border-radius: 5px;
 }
 </style>
