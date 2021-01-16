@@ -10,16 +10,27 @@
 </template>
 
 <script>
+import { eventBus } from "../main.js";
+
 export default {
   name: "location-details",
-  props: ["location"],
+  data() {
+    return {
+      location: null,
+    };
+  },
+  mounted() {
+    eventBus.$on("location-selected", (location) => {
+      this.location = location;
+    });
+  },
 };
 </script>
 
 <style>
 .location-info {
-  display: flex;
-  flex-direction: row;
+  /* display: flex; */
+  /* flex-direction: row; */
   justify-content: space-around;
   text-align: center;
   background-color: purple;

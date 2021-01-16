@@ -1,16 +1,20 @@
 <template>
   <div class="outer-container">
     <h1>Rick And Morty</h1>
-    <character-filter-form :characters="characters"></character-filter-form>
+    <div class="selects">
+      <character-filter-form :characters="characters"></character-filter-form>
+      <location-filter-form :locations="locations"></location-filter-form>
+    </div>
     <div class="main-container">
       <character-detail character="character"></character-detail>
+      <location-details location="location"></location-details>
     </div>
   </div>
 </template>
 
 <script>
 import { eventBus } from "./main.js";
-import LocationList from "./components/LocationList.vue";
+import LocationFilterForm from "./components/LocationFilterForm.vue";
 import LocationDetails from "./components/LocationDetails.vue";
 
 import CharacterFilterForm from "./components/CharacterFilterForm.vue";
@@ -29,10 +33,6 @@ export default {
   mounted() {
     this.getAllCharacters();
     this.getAllLocations();
-
-    eventBus.$on("selected-location", (location) => {
-      this.selectedLocation = location;
-    });
   },
   methods: {
     getAllCharacters: function () {
@@ -76,8 +76,8 @@ export default {
   components: {
     "character-filter-form": CharacterFilterForm,
     "character-detail": CharacterDetail,
-    // "location-list": LocationList,
-    // "location-details": LocationDetails,
+    "location-filter-form": LocationFilterForm,
+    "location-details": LocationDetails,
   },
 };
 </script>
@@ -89,6 +89,10 @@ body {
 }
 h1 {
   text-align: center;
+}
+.selects {
+  display: flex;
+  flex-direction: row;
 }
 .main-container {
   display: flex;
