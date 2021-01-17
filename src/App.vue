@@ -36,48 +36,41 @@ export default {
   },
   methods: {
     getAllCharacters: function () {
-      fetch("https://rickandmortyapi.com/api/character?page=1")
-        .then((res) => res.json())
-        .then((data) => (this.characters = data.results));
-
-      // // create array from 1-671
-      // const array = [];
-      // for (var i = 0; i < 1; i++) {
-      //   array.push(i + 1);
-      // }
-      // // map promise to an array of api fetch with character number taking the number from previous array
-      // const promises = array.map((number) => {
-      //   return fetch(
-      //     `https://rickandmortyapi.com/api/character/${number}`
-      //   ).then((res) => res.json());
-      // });
-      // Promise.all(promises).then((data) => {
-      //   const listOfCharacters = data.reduce((character, characterToAdd) => {
-      //     return character.concat(characterToAdd);
-      //   }, []);
-      //   return (this.characters = listOfCharacters);
-      // });
+      // create array from 1-671
+      const array = [];
+      for (var i = 0; i < 1; i++) {
+        array.push(i + 1);
+      }
+      // map promise to an array of api fetch with character number taking the number from previous array
+      const promises = array.map((number) => {
+        return fetch(
+          `https://rickandmortyapi.com/api/character/?page=${number}`
+        ).then((res) => res.json());
+      });
+      Promise.all(promises).then((data) => {
+        const listOfCharacters = data.reduce((character, characterToAdd) => {
+          return character.concat(characterToAdd.results);
+        }, []);
+        return (this.characters = listOfCharacters);
+      });
     },
 
     getAllLocations: function () {
-      fetch("https://rickandmortyapi.com/api/location?page=1")
-        .then((res) => res.json())
-        .then((data) => (this.locations = data.results));
-      // const array = [];
-      // for (var i = 0; i < 1; i++) {
-      //   array.push(i + 1);
-      // }
-      // const promises = array.map((number) => {
-      //   return fetch(
-      //     `https://rickandmortyapi.com/api/location/${number}`
-      //   ).then((res) => res.json());
-      // });
-      // Promise.all(promises).then((data) => {
-      //   const listOfLocations = data.reduce((location, locationToAdd) => {
-      //     return location.concat(locationToAdd);
-      //   }, []);
-      //   return (this.locations = listOfLocations);
-      // });
+      const array = [];
+      for (var i = 0; i < 1; i++) {
+        array.push(i + 1);
+      }
+      const promises = array.map((number) => {
+        return fetch(
+          `https://rickandmortyapi.com/api/location/?page=${number}`
+        ).then((res) => res.json());
+      });
+      Promise.all(promises).then((data) => {
+        const listOfLocations = data.reduce((location, locationToAdd) => {
+          return location.concat(locationToAdd.results);
+        }, []);
+        return (this.locations = listOfLocations);
+      });
     },
   },
   components: {
