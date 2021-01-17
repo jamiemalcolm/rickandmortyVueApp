@@ -4,7 +4,14 @@
       <li>
         <h2><span>Name :</span> {{ character.name }}</h2>
         <p><span>Species :</span> {{ character.species }}</p>
+        <p v-if="character.type"><span>Type :</span> {{ character.type }}</p>
+
         <p><span>Origin :</span> {{ character.origin.name }}</p>
+        <p><span>Status :</span> {{ character.status }}</p>
+        <p><span>Gender :</span> {{ character.gender }}</p>
+        <form v-on:submit.prevent="saveCharacter">
+          <input type="submit" value="Add to Favourites" />
+        </form>
         <!-- <p><span>Appears in </span>:{{ character.episode }}</p> -->
       </li>
 
@@ -31,6 +38,10 @@ export default {
   },
   methods: {
     getEpisodesIn: function () {},
+
+    saveCharacter: function () {
+      eventBus.$emit("character-to-save", this.character);
+    },
   },
 };
 </script>
@@ -39,7 +50,7 @@ export default {
 .character-info {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   text-align: center;
   background-color: purple;
   border-radius: 35px;

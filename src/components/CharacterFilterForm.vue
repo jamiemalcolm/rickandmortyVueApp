@@ -7,7 +7,7 @@
       v-on:keyup="searchForCharacter"
     />
     <select v-on:change="handleSelect" v-model="selectedCharacter">
-      <option value="">Select A Character...</option>
+      <option value="Select" selected="selected">Select A Character...</option>
       <option v-for="character in characters" :value="character">
         {{ character.name }}
       </option>

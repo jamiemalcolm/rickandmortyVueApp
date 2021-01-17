@@ -28,9 +28,16 @@ export default {
       // selectedCharacter: null,
       locations: [],
       // selectedLocation: null,
+      favouriteCharacters: [],
     };
   },
   mounted() {
+    eventBus.$on("character-to-save", (character) => {
+      if (!this.favouriteCharacters.includes(character)) {
+        this.favouriteCharacters.push(character);
+      }
+    });
+
     this.getAllCharacters();
     this.getAllLocations();
   },

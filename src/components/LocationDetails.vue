@@ -2,8 +2,9 @@
   <div v-if="location">
     <div class="location-info">
       <li>
-        <h2>{{ location.name }}</h2>
-        <p>{{ location.type }}</p>
+        <h2><span>Name :</span> {{ location.name }}</h2>
+        <p><span>Type :</span> {{ location.type }}</p>
+        <p><span>Dimension :</span> {{ location.dimension }}</p>
       </li>
     </div>
   </div>
