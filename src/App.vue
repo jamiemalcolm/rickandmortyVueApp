@@ -9,6 +9,8 @@
       <character-detail character="character"></character-detail>
       <location-details location="location"></location-details>
     </div>
+    <h2>Favourite Characters</h2>
+    <p v-for="character in favouriteCharacters">{{ character.name }}</p>
   </div>
 </template>
 
