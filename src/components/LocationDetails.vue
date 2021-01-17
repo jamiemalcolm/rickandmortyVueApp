@@ -34,8 +34,9 @@ export default {
   /* flex-direction: row; */
   justify-content: space-around;
   text-align: center;
-  background-color: purple;
+  background-color: #899e8b;
   border-radius: 35px;
   padding: 20px;
+  color: #81f499;
 }
 </style>

@@ -50,7 +50,7 @@ export default {
 <style>
 select {
   text-align: center;
-  background-color: #7f5a83;
+  background-color: #899e8b;
   color: white;
   border: none;
   border-radius: 5px;

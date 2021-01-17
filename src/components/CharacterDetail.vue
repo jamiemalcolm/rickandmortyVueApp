@@ -52,7 +52,7 @@ export default {
   flex-direction: row;
   justify-content: space-between;
   text-align: center;
-  background-color: purple;
+  background-color: #81f499;
   border-radius: 35px;
   width: fit-content;
   height: fit-content;
@@ -60,5 +60,7 @@ export default {
 }
 img {
   border-radius: 35px;
+  height: 250px;
+  width: 250px;
 }
 </style>

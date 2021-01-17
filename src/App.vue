@@ -1,6 +1,8 @@
 <template>
   <div class="outer-container">
-    <h1>Rick And Morty</h1>
+    <div class="title">
+      <h1>Rick And Morty</h1>
+    </div>
     <div class="selects">
       <character-filter-form :characters="characters"></character-filter-form>
       <location-filter-form :locations="locations"></location-filter-form>
@@ -9,8 +11,19 @@
       <character-detail character="character"></character-detail>
       <location-details location="location"></location-details>
     </div>
-    <h2>Favourite Characters</h2>
-    <p v-for="character in favouriteCharacters">{{ character.name }}</p>
+    <div class="favourite-list">
+      <h2>Favourite Characters</h2>
+      <p>
+        add characters to your favourites by searching for a character and
+        selecting 'add to favourites'
+      </p>
+      <div class="fav-list-item">
+        <li v-for="character in favouriteCharacters">
+          <img :class="small" v-bind:src="character.image" />
+          <p>{{ character.name }}</p>
+        </li>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -27,7 +40,7 @@ export default {
   data() {
     return {
       characters: [],
-      // selectedCharacter: null,
+      // selectedFavourite: null,
       locations: [],
       // selectedLocation: null,
       favouriteCharacters: [],
@@ -44,6 +57,10 @@ export default {
     this.getAllLocations();
   },
   methods: {
+    favouriteClicked: function () {
+      eventBus.$emit("favourite-character-clicked", this.selectedFavourite);
+    },
+
     getAllCharacters: function () {
       // create array from 1-671
       const array = [];
@@ -92,25 +109,53 @@ export default {
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap");
 body {
-  color: limegreen;
-  background-color: #9da2ab;
+  font-family: "Shadows Into Light", cursive;
+  font-size: larger;
+  color: #706c61;
+  background-color: #afece7;
+}
+.title {
+  background-image: url("https://media.istockphoto.com/vectors/retro-hippie-style-psychedelic-landscape-with-mountains-sun-and-the-vector-id1166455094?k=6&m=1166455094&s=612x612&w=0&h=v9bYMkx0A_-ahd4BzHLl0mRNE2IUqSwUQdVkAGb4IIo=");
+  background-size: 20%;
+  background-repeat: center;
+  border-radius: 100%;
 }
 h1 {
+  font-size: 400%;
   text-align: center;
+  color: #1e2d24;
 }
 .selects {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 .main-container {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 .list {
   justify-content: flex-start;
 }
 li {
+  text-decoration: solid;
   list-style: none;
+}
+img {
+  border-radius: 35px;
+  height: 100px;
+  width: 100px;
+}
+.favourite-list {
+  text-align: center;
+}
+.fav-list-item {
+  display: flex;
+  justify-content: space-evenly;
+  width: fit-content;
+  border-radius: 20px;
+  padding: 40px;
 }
 </style>
